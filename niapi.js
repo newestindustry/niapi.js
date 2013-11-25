@@ -7,7 +7,7 @@ function NIApi()
     
     if(params.token) {
         this.oauth_token = params.token;
-        localStorage.oauth_token = this.oauth_token;    
+        localStorage.oauth_token = this.oauth_token;
     } else if(localStorage.oauth_token) {
         this.oauth_token = localStorage.oauth_token;
     }
@@ -130,7 +130,7 @@ NIApi.prototype.call = function(url,callback,method,post)
             callback(error, data, x);
         }
         
-    }
+    };
     
     if(method) {
         requestMethod = method.toUpperCase();    
