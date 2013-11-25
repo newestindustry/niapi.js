@@ -1,22 +1,18 @@
 <html>
     <head>
-        <script src="/niapisdk.min.js"></script>
+        <script src="/niapisdk.js"></script>
         <script>
-            NI.client_id = "938hf09283jd09j3s092svk1"; // NON Existing Client ID, make sure you enter one you've got from us
-            NI.redirect_uri = "/examples/login.html"; // Full redirect uri, this is where the NI Community will redirect you to when you logged in or encounter an error.
-            
-            NI.init();
-
-            if(NI.oauth_token != "") {
-                NI.Me(meCallback);
-            }
-            
-            function meCallback(error, data) 
-            {
-                if (error == false) {
-                    alert("Welcome back, "+data.me.firstname);
+            NI.init({
+               client_id: "2938h0293j9032jc048h03dk",
+               redirect_uri: "/examples/login.html"
+            });
+            NI.Me(function(error, data) {
+                if(error) {
+                    alert("Not logged in?");
+                } else {
+                    alert("Welcome back, "+data.me.firstname);    
                 }
-            }
+            });
 		</script>
     </head>
     <body>

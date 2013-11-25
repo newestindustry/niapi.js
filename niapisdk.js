@@ -11,7 +11,21 @@ window.NI = (function () {
         error:false,
         me:false,
 
-        init: function() {
+        init: function(obj) {
+            if(typeof obj !== "undefined") {
+                this.api_url        = (typeof obj.api_url !== "undefined") ? obj.api_url : this.api_url;
+                this.client_id      = (typeof obj.client_id !== "undefined") ? obj.client_id : false;
+                this.redirect_uri   = (typeof obj.redirect_uri !== "undefined") ? obj.redirect_uri : false;
+            }
+        
+            this.parseToken();
+        },
+        
+        emptyCallback: function(error, data) {
+            
+        },
+        
+        parseToken: function() {
             var params = {}, queryString = location.hash.substring(1), regex = /([^&=]+)=([^&]*)/g, m;
             while (m = regex.exec(queryString)) {
                 params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
@@ -40,7 +54,10 @@ window.NI = (function () {
         },
         
         Logout: function() {
-            this.Delete("/oauth/token");
+            if(this.oauth_token) {
+                this.Delete("/oauth/token", this.emptyCallback);    
+            }
+            
             this.oauth_token = false;
             localStorage.removeItem('oauth_token');
         },
@@ -109,14 +126,13 @@ window.NI = (function () {
                     if(x.status === 200 || x.status === 201 || x.status === 204) {
                         error = false;
                     } else if(x.status === 401) {
-                        this.InvalidateToken();
+                        NI.Logout();
                         error = new Error("NIApi: Access denied");
                     } else {
                         error = new Error("NIApi: Response status: "+x.status);
                     }
                     
                     var data = JSON.parse(x.responseText);
-                    
                     callback(error, data, x);
                 }
             };
