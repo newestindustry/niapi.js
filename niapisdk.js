@@ -69,6 +69,17 @@ window.NI = (function () {
             this.call(this.api_url+uri, callback, "DELETE");
         },
         
+        toQueryString: function(obj) {
+            var str = "";
+            var seperator = "";
+            for (var key in obj) {
+                str += seperator;
+                str += encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]);
+                seperator = "&";
+            }
+            return str;
+        },
+        
         call: function(url, callback, method, post) {
             var requestTimeout, x, requestMethod, error;
             try{
