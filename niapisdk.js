@@ -11,12 +11,14 @@ window.NI = (function () {
         error: false,
         me: false,
         root: document.getElementById('ni-root'),
+        sidebar_no_margin: false,
 
         init: function(obj) {
             if(typeof obj !== "undefined") {
                 NI.api_url        = (typeof obj.api_url !== "undefined") ? obj.api_url : NI.api_url;
                 NI.client_id      = (typeof obj.client_id !== "undefined") ? obj.client_id : false;
                 NI.redirect_uri   = (typeof obj.redirect_uri !== "undefined") ? obj.redirect_uri : false;
+                NI.sidebar_no_margin   = (typeof obj.sidebar_no_margin !== "undefined") ? true : false;
             }
         
             NI.parseToken();
@@ -45,6 +47,11 @@ window.NI = (function () {
             }
         },
     
+        setToken: function(token) {
+            NI.oauth_token = token;
+            localStorage.oauth_token = NI.oauth_token;
+        },
+        
         Me: function(callback) {
             NI.Get("/me", callback);
         },
@@ -65,7 +72,7 @@ window.NI = (function () {
         },
         
         Get: function(uri, callback) {
-            NI.call(NI.api_url+uri, callback, "GET");
+            NI.call(uri, callback, "GET");
         },
         
         Post: function(uri, callback, data) {
@@ -73,7 +80,7 @@ window.NI = (function () {
                 data = NI.toQueryString(data);
             }
 
-            NI.call(NI.api_url+uri, callback, "POST", data);
+            NI.call(uri, callback, "POST", data);
         },
         
         Put: function(uri, callback, data) {
@@ -81,11 +88,11 @@ window.NI = (function () {
                 data = NI.toQueryString(data);
             }
 
-            NI.call(NI.api_url+uri, callback, "PUT", data);
+            NI.call(uri, callback, "PUT", data);
         },
         
         Delete: function(uri, callback) {
-            NI.call(NI.api_url+uri, callback, "DELETE");
+            NI.call(uri, callback, "DELETE");
         },
         
         toQueryString: function(obj) {
@@ -100,17 +107,20 @@ window.NI = (function () {
         },
         
         loadSidebar: function() {
-            NI.call(NI.api_url+"/frontend/menu/left/_format/html", function(error, data) {
+            NI.Get("/frontend/menu/left/_format/html", function(error, data) {
                 document.getElementById('ni-root').innerHTML = data;
+                if(NI.sidebar_no_margin === false) {
+                    document.body.style.marginLeft = "230px";
+                }
                 
-                NI.call(NI.api_url+"/mail/messages/thread/false/read/false/_limit/1", function(error, data) {
+                NI.call("/mail/messages/thread/false/read/false/_limit/1", function(error, data) {
                     document.getElementById('ni-totalUnreadMessages').innerHTML = data.total;
                 });
             });
         },
         
         getMessages: function() {
-            NI.call(NI.api_url+"/mail/messages/thread/false/_limit/5/_sort/created/_direction/desc/_format/html", function(error, data) {
+            NI.Get("/mail/messages/thread/false/_limit/5/_sort/created/_direction/desc/_format/html", function(error, data) {
                 document.getElementById('ni-messagesPreviewList').innerHTML = data;
                 if(document.getElementById('ni-messagesPreview').style.display === "none") {
                     document.getElementById('ni-messagesPreview').style.display = "block";
@@ -121,8 +131,40 @@ window.NI = (function () {
             });
         },
         
+        getComments: function(options, callback) {
+            if(typeof options !== "undefined") {
+                options.url        = (typeof options.url !== "undefined") ? options.url : window.location.href;
+                options.id        = (typeof options.id !== "undefined") ? options.id : false;
+            }
+            
+            if(typeof callback === "undefined") {
+                callback = NI.emptyCallback;
+            }
+            console.log(encodeURIComponent(options.url));
+            NI.Get("/comments/_format/html/url/"+encodeURIComponent(options.url), function(error, data) {
+                document.getElementById(options.id).innerHTML = data;
+                document.getElementById('niCreateCommentFormUrl').value = options.url;
+                NI.commentFixSubmit(options, callback);
+            });
+        },
+        
+        commentFixSubmit: function(options, callback) {
+            document.getElementById('niCreateComment').onsubmit = function() {
+                var ser = serialize(document.getElementById('niCreateComment'));
+                NI.Post("/comments", function(error) {
+                    if(!error) {
+                        NI.getComments(options, callback);
+                    }
+                }, ser);
+            
+                return false;
+            };
+        },
+        
         call: function(url, callback, method, post) {
             var requestTimeout, x, requestMethod, error;
+            
+            url = NI.api_url + url;
             try{
                 x = new XMLHttpRequest();
             } catch(exc) {
