@@ -58,7 +58,7 @@ NI.Api = {
                 if(x.status === 200 || x.status === 201 || x.status === 204) {
                     error = false;
                 } else if(x.status === 401) {
-/*                     NI.Logout(); */
+                    NI.Profile.Logout();
                     error = new Error("NIApi: Access denied");
                 } else {
                     error = new Error("NIApi: Response status: "+x.status);
