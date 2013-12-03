@@ -28,12 +28,15 @@ NI.Comments = {
         var element = document.getElementById(id);
         
         if(element) {
-            NI.Api.Get('/comments/_format/html/element/'+id+'/url/'+encodeURIComponent(url),
+            NI.Api.Get('/comments/_format/html/_limit/50/element/'+id+'/url/'+encodeURIComponent(url),
                         function(error, data) {
                             element.innerHTML = data;
                             
-                            document.getElementById('niCreateCommentFormUrl'+id).value = url;
-                            NI.Comments.fixSubmit(id, url);
+                            if(NI.Me) {
+                                document.getElementById('niCreateCommentFormUrl'+id).value = url;
+                                NI.Comments.fixSubmit(id, url);
+                            }
+                            
                         });
         }
         
@@ -48,7 +51,7 @@ NI.Comments = {
     },
     
     Create: function(serializedData, id, url) {
-        NI.Api.Post('/comments/_format/html/element/'+id+'/url/'+encodeURIComponent(url), serializedData, function(error) {
+        NI.Api.Post('/comments/_format/html/_limit/50/element/'+id+'/url/'+encodeURIComponent(url), serializedData, function(error) {
             if(!error) {
                 NI.Comments.Get(id, url);
             }

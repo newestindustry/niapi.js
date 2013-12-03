@@ -28,7 +28,7 @@ NI.Api = {
         }
         
         if(typeof callback === "undefined") {
-            callback = NI.emptyCallback;
+            callback = NI.Api.emptyCallback;
         }
 
         try{
