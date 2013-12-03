@@ -1,22 +1,25 @@
 <html>
     <head>
-        <script src="/niapisdk.js"></script>
+        <script src="https://cdn.newestindustry.nl/js/niapi.min.js"></script>
         <script>
-            NI.init({
-               client_id: "2938h0293j9032jc048h03dk",
-               redirect_uri: "/examples/login.html"
+            NI.Options.Set({
+                client_id: "a923dj039j290j09dj2039jd",  // EXAMPLE, Please change to correct client id
+                redirect_url: "http://www.example.com/back.php?s=ni" // EXAMPLE, Please change to correct redirect url
             });
-            NI.Me(function(error, data) {
+            
+            NI.Profile.Me(function(error, data) {
                 if(error) {
-                    alert("Not logged in?");
+                    
                 } else {
-                    alert("Welcome back, "+data.me.firstname);    
+                    NI.Sidebar.Get();
                 }
             });
 		</script>
+		<link rel="stylesheet" href="https://cdn.newestindustry.nl/css/modules/menu/profilebar-ni.css">
     </head>
     <body>
         <div id="ni-root"></div>
-        <a href="#" onclick="NI.Login();">Login</a> | <a href="#" onclick="NI.Logout();">Logout</a>
+        <a href="#" onclick="NI.Profile.Login();">Login</a> | <a href="#" onclick="NI.Profile.Logout();">Logout</a>
+        
     </body>
 </html>
