@@ -1,51 +1,56 @@
 NI.Comments = {
     
     url: false,
-
+    
     setUrl: function(url) {
-        if(this.url) {
-            this.url = this.url;
+        if(url) {
+            url = url;
         } else if(typeof url !== "undefined") {
-            this.url = url;
+            url = url;
         } else {
             if(NI.Options.comments_include_hash) {
-                this.url = window.location.href;
+                url = window.location.href;
             } else {
-                this.url = window.location.href.replace(window.location.hash, "");
+                url = window.location.href.replace(window.location.hash, "");
             }
         }
         
-        return this.url;
+        return url;
     },
 
-    Get: function(url) {
-        this.setUrl(url);
+    Get: function(id, url) {
+        url = this.setUrl(url);
         
-        var element = document.getElementById("ni-comments");
+        if(typeof id === "undefined") {
+            id = "ni-comments";
+        }
+        
+        var element = document.getElementById(id);
+        
         if(element) {
-            NI.Api.Get('/comments/_format/html/url/'+encodeURIComponent(NI.Comments.url),
+            NI.Api.Get('/comments/_format/html/element/'+id+'/url/'+encodeURIComponent(url),
                         function(error, data) {
                             element.innerHTML = data;
                             
-                            document.getElementById('niCreateCommentFormUrl').value = NI.Comments.url;
-                            NI.Comments.fixSubmit();
+                            document.getElementById('niCreateCommentFormUrl'+id).value = url;
+                            NI.Comments.fixSubmit(id, url);
                         });
         }
         
     },
     
-    fixSubmit: function() {
-        document.getElementById('niCreateComment').onsubmit = function() {
-            var ser = niapi_serialize(document.getElementById('niCreateComment'));
-            NI.Comments.Create(ser);
+    fixSubmit: function(id, url) {
+        document.getElementById('niCreateComment'+id).onsubmit = function() {
+            var ser = niapi_serialize(document.getElementById('niCreateComment'+id));
+            NI.Comments.Create(ser, id, url);
             return false;
         };
     },
     
-    Create: function(serializedData) {
-        NI.Api.Post('/comments/_format/html/url/'+encodeURIComponent(NI.Comments.url), serializedData, function(error) {
+    Create: function(serializedData, id, url) {
+        NI.Api.Post('/comments/_format/html/element/'+id+'/url/'+encodeURIComponent(url), serializedData, function(error) {
             if(!error) {
-                NI.Comments.Get();
+                NI.Comments.Get(id, url);
             }
         });
     }

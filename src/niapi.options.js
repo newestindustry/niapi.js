@@ -14,20 +14,24 @@ NI.Options = {
     comments_include_hash: true,
 
     Set: function(options) {
+        var availableOptions = [
+            'api_url',
+            'auth_url',
+            'client_id',
+            'redirect_url',
+            'scope',
+            'oauth_token',
+            'refresh_token',
+            'sidebar_force_margin',
+            'comments_include_hash'
+        ];
+    
         if(typeof options === "object") {
-            this.api_url        = (typeof options.api_url !== "undefined")          ? options.api_url       : this.api_url;
-            this.auth_url       = (typeof options.auth_url !== "undefined")         ? options.auth_url      : this.auth_url;
-            this.client_id      = (typeof options.client_id !== "undefined")        ? options.client_id     : this.client_id;
-            this.redirect_url   = (typeof options.redirect_url !== "undefined")     ? options.redirect_url  : this.redirect_url;
-            this.scope          = (typeof options.scope !== "undefined")            ? options.scope         : this.scope;
-            this.oauth_token    = (typeof options.oauth_token !== "undefined")      ? options.oauth_token   : this.oauth_token;
-            this.refresh_token  = (typeof options.refresh_token !== "undefined")    ? options.refresh_token : this.refresh_token;
-            
-            this.sidebar_force_margin  = (typeof options.sidebar_force_margin !== "undefined")    ? options.sidebar_force_margin : this.sidebar_force_margin;
-            
-            this.comments_include_hash  = (typeof options.comments_include_hash !== "undefined")    ? options.comments_include_hash : this.comments_include_hash;
+            for(var x = 0; x < availableOptions.length; x++) {
+                this[availableOptions[x]] = (typeof options[availableOptions[x]] !== "undefined") ? options[availableOptions[x]] : this[availableOptions[x]];
+            }
         }
-        
+
         NI.Api.parseToken();
     },
     
