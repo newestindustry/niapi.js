@@ -16,11 +16,12 @@ NI.Profile = {
     Logout: function() {
         if(NI.Options.oauth_token) {
             NI.Api.Delete("/oauth/token", NI.Api.emptyCallback);
+            window.location.href = window.location.href;
         }
         
         NI.Options.oauth_token = false;
         localStorage.removeItem('oauth_token');
+        
+        return false;
     }
-    
-    
 };

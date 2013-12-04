@@ -112,6 +112,7 @@ NI.Api = {
 
         if(params.token) {
             NI.Options.setToken(params.token);
+            window.location.href = window.location.href.replace(window.location.hash, "");
         } else if(localStorage.oauth_token) {
             NI.Options.setToken(localStorage.oauth_token);
         }
