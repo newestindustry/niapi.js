@@ -3,18 +3,16 @@ NI.Comments = {
     url: false,
     
     setUrl: function(url) {
-        if(url) {
-            url = url;
-        } else if(typeof url !== "undefined") {
+        if(typeof url !== "undefined") {
             url = url;
         } else {
-            if(NI.Options.comments_include_hash) {
+            if(NI.Options.comments_include_hash === true) {
                 url = window.location.href;
             } else {
                 url = window.location.href.replace(window.location.hash, "");
             }
         }
-        
+
         return url;
     },
 
@@ -32,7 +30,7 @@ NI.Comments = {
                         function(error, data) {
                             element.innerHTML = data;
                             
-                            if(NI.Me) {
+                            if(NI.Options.oauth_token) {
                                 document.getElementById('niCreateCommentFormUrl'+id).value = url;
                                 NI.Comments.fixSubmit(id, url);
                             }
