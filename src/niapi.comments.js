@@ -2,6 +2,19 @@ NI.Comments = {
     
     url: false,
     
+    injectCss: function() {
+        var element = document.getElementById('niCssComments');
+        if(!element) {
+            var link = document.createElement("link");
+            link.href = "https://cdn.newestindustry.nl/css/modules/comments-ni.css";
+            link.type = "text/css";
+            link.rel = "stylesheet";
+            link.id = "niCssComments";
+            document.getElementsByTagName("head")[0].appendChild(link);
+        }
+        
+    },
+    
     setUrl: function(url) {
         if(typeof url !== "undefined") {
             url = url;
@@ -17,6 +30,7 @@ NI.Comments = {
     },
 
     Get: function(id, url) {
+        this.injectCss();
         url = this.setUrl(url);
         
         if(typeof id === "undefined") {
@@ -26,7 +40,10 @@ NI.Comments = {
         var element = document.getElementById(id);
         
         if(element) {
-            NI.Api.Get('/comments/_format/html/_limit/50/element/'+id+'/url/'+encodeURIComponent(url),
+            var getUrl = '/comments/_format/html/_limit/50/element/'+id+'/url/'+encodeURIComponent(url);
+            getUrl += "/form_position/"+NI.Options.comments_form_position+"/reverse/"+NI.Options.comments_reverse;
+
+            NI.Api.Get(getUrl,
                         function(error, data) {
                             element.innerHTML = data;
                             

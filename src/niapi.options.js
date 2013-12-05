@@ -12,6 +12,8 @@ NI.Options = {
     
     /* COMMENTS */
     comments_include_hash: true,
+    comments_form_position: "bottom",
+    comments_reverse: false,
 
     Set: function(options) {
         var availableOptions = [
@@ -23,7 +25,9 @@ NI.Options = {
             'oauth_token',
             'refresh_token',
             'sidebar_force_margin',
-            'comments_include_hash'
+            'comments_include_hash',
+            'comments_form_position',
+            'comments_reverse'
         ];
     
         if(typeof options === "object") {

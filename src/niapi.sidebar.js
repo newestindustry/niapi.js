@@ -1,5 +1,18 @@
 NI.Sidebar = {
+    injectCss: function() {
+        var element = document.getElementById('niCssSidebar');
+        if(!element) {
+            var link = document.createElement("link");
+            link.href = "https://cdn.newestindustry.nl/css/modules/menu/profilebar-ni.css";
+            link.type = "text/css";
+            link.rel = "stylesheet";
+            link.id = "niCssSidebar";
+            document.getElementsByTagName("head")[0].appendChild(link);
+        }
+    },
+    
     Get: function() {
+        this.injectCss();
         var element = document.getElementById("ni-root");
         if(element) {
             NI.Api.Get("/frontend/menu/left/_format/html", function(error, data) {
