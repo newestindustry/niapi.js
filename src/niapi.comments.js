@@ -6,7 +6,7 @@ NI.Comments = {
         var element = document.getElementById('niCssComments');
         if(!element) {
             var link = document.createElement("link");
-            link.href = "https://cdn.newestindustry.nl/css/modules/comments-ni.css";
+            link.href = "https://cdn.newestindustry.nl/css/modules/ni-comments.css";
             link.type = "text/css";
             link.rel = "stylesheet";
             link.id = "niCssComments";
