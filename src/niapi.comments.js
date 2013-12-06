@@ -50,6 +50,7 @@ NI.Comments = {
                             if(NI.Options.oauth_token) {
                                 document.getElementById('niCreateCommentFormUrl'+id).value = url;
                                 NI.Comments.fixSubmit(id, url);
+                                NI.Favorite.Prepare();
                             }
                             
                         });

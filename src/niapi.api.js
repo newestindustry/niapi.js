@@ -66,7 +66,7 @@ NI.Api = {
 
                 var data;
                 
-                if(x.getResponseHeader('content-type').indexOf("application/json") !== -1) {
+                if(x.getResponseHeader('content-type').indexOf("application/json") !== -1 && x.status !== 204) {
                     data = JSON.parse(x.responseText);
                 } else {
                     data = x.responseText;
