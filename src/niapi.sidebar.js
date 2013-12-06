@@ -11,7 +11,7 @@ NI.Sidebar = {
         }
     },
     
-    Get: function() {
+    Get: function(callback) {
         this.injectCss();
         var element = document.getElementById("ni-root");
         if(element) {
@@ -20,6 +20,9 @@ NI.Sidebar = {
                 if(NI.Options.sidebar_force_margin === true) {
                     document.body.style.marginLeft = "230px";
                     NI.Messages.GetSidebarCount();
+                }
+                if (callback && typeof(callback) === "function") {
+                    callback();
                 }
             });
         }
