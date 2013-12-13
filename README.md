@@ -4,6 +4,68 @@ This is the Newest Industry API Javascript SDK for implementing the oauth2 flows
 
 This sdk is also available from our cdn: https://cdn.newestindustry.nl/js/niapi.min.js
 
+## Basic implementation
+Basic implementation is pretty simple. All you need is a client_id from us (contact us for getting one) and you can implement our JS Oauth2 Api. Place the js sdk in the header of your document:
+
+	<script src="https://cdn.newestindustry.nl/js/niapi.min.js" type="text/javascript"></script>
+	
+And then the following just below:
+    
+    <script>
+    NI.Options.Set({
+        client_id: "theclientIDyoureceived",
+        redirect_url: "http://your.redirect.url/with/path/"
+    }); 
+    </script>
+    
+And you're ready to go! If you want to authenticate add this check (anywhere is fine, as long as it is below the NI.Options.Set and where the javascript file is loaded).
+            
+	<script>
+	NI.Profile.Me(function(error, data) {
+		if(error) {
+			console.log(error);
+		} else {
+			console.log(data);
+		}
+	});
+	</script>
+	
+If you are not logged in you can send someone over to our login pages by using 
+    
+    NI.Profile.Login();
+    
+This handles the rest. 
+
+
+## The basic implementation in HTML
+
+So here is the full basic implementation in HTML (as an example):
+
+    <html>
+	    <head>
+	        <script src="https://cdn.newestindustry.nl/js/niapi.min.js"></script>
+	        <script>
+	            NI.Options.Set({
+	                client_id: "theclientIDyoureceived",
+        			redirect_url: "http://your.redirect.url/with/path/to/this.file"
+	            });
+	            
+	            NI.Profile.Me(function(error, data) {
+	                if(error) {
+	                    
+	                } else {
+	                    document.getElementById('name').innerHTML = data.me.firstname;
+	                }
+	            });
+			</script>
+	    </head>
+	    <body>
+	        Welcome back, <span id="name"></span>
+	        <br><br>
+	        <a href="#" onclick="NI.Profile.Login();">Click here to Login</a>
+	    </body>
+	</html>
+
 ## Options
 You can set multiple options by doing so via the options plugin:
 
