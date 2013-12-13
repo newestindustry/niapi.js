@@ -6,7 +6,7 @@ NI.Options = {
     scope: "default",
     oauth_token: false,
     refresh_token: false,
-    
+    auth_redirect_type: "hash",
     /* SIDEBAR */
     sidebar_force_margin: true,
     
@@ -24,6 +24,7 @@ NI.Options = {
             'scope',
             'oauth_token',
             'refresh_token',
+            'auth_redirect_type',
             'sidebar_force_margin',
             'comments_include_hash',
             'comments_form_position',

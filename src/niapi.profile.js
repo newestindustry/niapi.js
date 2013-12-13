@@ -9,7 +9,7 @@ NI.Profile = {
 
     Login: function() {
         if(!NI.Options.oauth_token) {
-            location.href = NI.Options.api_url+NI.Options.auth_url+"?response_type=token&client_id="+NI.Options.client_id+"&redirect_uri="+NI.Options.redirect_url+"&scope="+NI.Options.scope;
+            location.href = NI.Options.api_url+NI.Options.auth_url+"?response_type=token&client_id="+NI.Options.client_id+"&redirect_uri="+NI.Options.redirect_url+"&scope="+NI.Options.scope+"&redirect_type="+NI.Options.auth_redirect_type;
         }
     },
     
