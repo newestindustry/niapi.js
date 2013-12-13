@@ -45,7 +45,7 @@ You can set multiple options by doing so via the options plugin:
             <td>API</td>
             <td>The data scope</td>
             <td>"default"</td>
-            <td>"default,other"</td>
+            <td>"default"</td>
         </tr>
         <tr>
             <td>auth_redirect_type</td>
