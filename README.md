@@ -110,13 +110,6 @@ You can set multiple options by doing so via the options plugin:
             <td>"default"</td>
         </tr>
         <tr>
-            <td>auth_redirect_type</td>
-            <td>API</td>
-            <td>The redirect token parameter seperator</td>
-            <td>"hash"</td>
-            <td>"hash" (=#) or "get" (=?)</td>
-        </tr>
-        <tr>
             <td>sidebar_force_margin</td>
             <td>Sidebar</td>
             <td>Wether the body should get a fixed margin when the sidebar plugin is used</td>
