@@ -14,12 +14,23 @@ NI.Sidebar = {
     Get: function(callback) {
         this.injectCss();
         var element = document.getElementById("ni-root");
+        var body    = document.getElementsByTagName("body")[0];
+        
         if(element) {
             NI.Api.Get("/frontend/menu/left/_format/html", function(error, data) {
                 document.getElementById('ni-root').innerHTML = data;
+                NI.Messages.GetSidebarCount();
+                                
+                body.onkeydown = function(e) {
+                    var messagesPreview = document.getElementById('ni-messagesPreview');
+                    var keyDown = e.keyCode;
+                    if (messagesPreview.style.display !== "none" && keyDown === 27) {
+                        messagesPreview.style.display = "none";
+                    }
+                };
+                
                 if(NI.Options.sidebar_force_margin === true) {
                     document.body.style.marginLeft = "230px";
-                    NI.Messages.GetSidebarCount();
                 }
                 if (callback && typeof(callback) === "function") {
                     callback();
