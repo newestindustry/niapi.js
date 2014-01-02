@@ -20,7 +20,7 @@ NI.Sidebar = {
             NI.Api.Get("/frontend/menu/left/_format/html", function(error, data) {
                 document.getElementById('ni-root').innerHTML = data;
                 NI.Messages.GetSidebarCount();
-                                
+
                 body.onkeydown = function(e) {
                     var messagesPreview = document.getElementById('ni-messagesPreview');
                     var keyDown = e.keyCode;
@@ -37,6 +37,17 @@ NI.Sidebar = {
                 }
             });
         }
+    },
+    
+    ShowSettings: function() {
+        if(document.getElementById('buttonOpenSettings').className.indexOf("active") === -1) {
+            document.getElementById('buttonOpenSettings').className += " active";
+        } else {
+            var newName = document.getElementById('buttonOpenSettings').className.replace("active", "");
+            document.getElementById('buttonOpenSettings').className = newName;
+        }
+        
+        return false;
     },
     
     Remove: function() {
