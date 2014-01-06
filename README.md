@@ -139,3 +139,55 @@ You can set multiple options by doing so via the options plugin:
         </tr>
 
 </table>
+
+
+## Favorite button
+
+When you have an logged in user you can use the favorite button by adding the following HTML somewhere in your webpage:
+
+    <div class="ni-favorite"></div>
+
+This will create a favorite button which will mark the current page as an favorite. It is also possible to mark another than the current page as favorite by adding a data-href attribute. See the example below:
+
+    <div class="ni-favorite" data-href="http://newestindustry.nl"></div>
+
+This will add a favorite button for the webpage http://newestindustry.nl. There are a bunch of other data-attributes available which are listed below.
+
+<table>
+	<tr>
+    	<th>Option</th>
+	    <th>Description</th>
+	    <th>Default value</th>
+		<th>Example value</th>
+    </tr>
+	<tr>
+	    <td>data-href</td>
+	    <td>An alternative page to mark as favorite</td>
+	    <td>The current url</td>
+	    <td>"http://newestindustry.nl"</td>
+	</tr>
+	<tr>
+	    <td>data-style-icon</td>
+	    <td>An alternative favorite icon</td>
+	    <td>"fa-heart-o"</td>
+	    <td>Any font awesome icon class</td>
+	</tr>
+	<tr>
+	    <td>data-style-icon-active</td>
+	    <td>An alternative favorite icon for a page already marked as favorite</td>
+	    <td>"fa-heart""</td>
+	    <td>Any font awesome icon class</td>
+	</tr>
+	<tr>
+	    <td>data-style-class</td>
+	    <td>Any extra classes you want to assign to the a-tag within the favorite button</td>
+	    <td>-</td>
+	    <td>"ico small"</td>
+	</tr>
+	<tr>
+	    <td>data-style-active</td>
+	    <td>A extra class you want to assign to the a-tag of the favorite button when marked as favorite.</td>
+	    <td>-</td>
+	    <td>"active"</td>
+	</tr>
+</table>
