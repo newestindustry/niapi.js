@@ -20,7 +20,7 @@ NI.Notifications = {
                 var element = document.getElementById('ni-totalUnreadNotifications');
                 var elementDashboard = document.getElementById('notificationsTotalNew');
                 
-                if(typeof element !== "undefined") {
+                if(element) {
                     element.innerHTML = data.total;
                     if(data.total === 0) {
                         element.style.display = "none";
@@ -28,8 +28,8 @@ NI.Notifications = {
                         element.style.display = "block";
                     }
                 }
-                
-                if(typeof elementDashboard !== "undefined") {
+
+                if(elementDashboard) {
                     elementDashboard.innerHTML = data.total;
                     if(data.total === 0) {
                         elementDashboard.style.display = "none";
