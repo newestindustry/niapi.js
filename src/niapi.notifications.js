@@ -13,7 +13,7 @@ NI.Notifications = {
     },
 
     GetSidebarCount: function() {
-        NI.Api.Get("/notifications/_direction/desc/read/false/_limit/0/module/!general/type/!global", function(error, data) {
+        NI.Api.Get("/notifications/_direction/desc/read/false/_limit/0/type/!global", function(error, data) {
             if(error) {
                 alert("Er is iets fout gegaan");
             } else {
