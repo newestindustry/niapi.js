@@ -13,7 +13,19 @@ NI.Messages = {
     
     GetSidebarCount: function() {
         NI.Api.Get("/mail/messages/thread/false/read/false/_limit/1", function(error, data) {
-            document.getElementById('ni-totalUnreadMessages').innerHTML = data.total;
+            var element = document.getElementById('ni-totalUnreadMessages');
+            if(typeof element !== "undefined") {
+                element.innerHTML = data.total;
+                if(data.total === 0) {
+                    element.style.display = "none";
+                } else {
+                    element.style.display = "block";
+                }
+            }
+            
         });
+        setInterval(NI.Messages.GetSidebarCount,15000);
     }
 };
+
+

@@ -20,7 +20,9 @@ NI.Sidebar = {
             NI.Api.Get("/frontend/menu/left/_format/html", function(error, data) {
                 document.getElementById('ni-root').innerHTML = data;
                 NI.Messages.GetSidebarCount();
-
+                NI.Notifications.GetSidebarCount();
+                
+                
                 body.onkeydown = function(e) {
                     var messagesPreview = document.getElementById('ni-messagesPreview');
                     var keyDown = e.keyCode;
