@@ -17,6 +17,10 @@ NI.Favorite = {
         if(typeof loaded === "undefined") {
             var href = element.dataset.href;
             var url;
+            var extraClass = element.dataset.styleClass;
+            var activeClass = element.dataset.styleActive;
+            var alternativeIcon = element.dataset.styleIcon;
+            var alternativeActiveIcon = element.dataset.styleIconActive;
             
             if(typeof href !== "undefined" && href !== "") {
                 url = href;
@@ -28,7 +32,17 @@ NI.Favorite = {
             a.className = "btn";
             a.href = "";
             var i = document.createElement('i');
-            i.className = "fa fa-heart-o";
+            if (typeof alternativeIcon !== "undefined") {
+                i.className = "fa "+alternativeIcon;
+            }
+            else {
+                i.className = "fa fa-heart-o";
+            }
+            
+            if (typeof extraClass !== "undefined") {
+                newClassName = a.className + ' ' + extraClass;
+                a.className = newClassName;
+            }
             
             element.appendChild(a);
             a.appendChild(i);
@@ -40,7 +54,16 @@ NI.Favorite = {
                     if(x.status === 200) {
                         var fa = element.getElementsByClassName('fa');
                         for(x = 0; x < fa.length; x++) {
-                            fa[x].className = "fa fa-heart";
+                            
+                            if (typeof alternativeActiveIcon !== "undefined") {
+                                fa[x].className = "fa "+alternativeActiveIcon;
+                            }
+                            else {
+                                fa[x].className = "fa fa-heart";
+                            }
+                        }
+                        if (typeof activeClass !== "undefined") {
+                            a.className = a.className+' '+activeClass;
                         }
                     }
                 });
@@ -51,6 +74,9 @@ NI.Favorite = {
     Click: function(element) {
         var href = element.dataset.href;
         var url, a;
+        var activeClass = element.dataset.styleActive;
+        var alternativeIcon = element.dataset.styleIcon;
+        var alternativeActiveIcon = element.dataset.styleIconActive;
         if(typeof href !== "undefined" && href !== "") {
             url = href;
         } else {
@@ -59,15 +85,42 @@ NI.Favorite = {
         
         NI.Api.Post("/favorites/", "url="+encodeURIComponent(url), function(error, data, x) {
             if(x.status === 201) { // Created
-                a = element.getElementsByClassName('fa-heart-o');
-                for(x = 0; x < a.length; x++) {
-                    a[x].className = "fa fa-heart";
+                i = element.getElementsByClassName('fa');
+                
+                for(x = 0; x < i.length; x++) {
+                    if (typeof alternativeActiveIcon !== "undefined") {
+                        i[x].className = "fa "+alternativeActiveIcon;
+                    }
+                    else {
+                        i[x].className = "fa fa-heart";
+                    }
                 }
+                
+                if (typeof activeClass !== "undefined") {
+                    a = element.getElementsByClassName('btn');
+                    for(x = 0; x < a.length; x++) {
+                        a[x].className = a[x].className + ' '+activeClass;
+                    }
+                }
+                
             } else {
                 // Removed
-                a = element.getElementsByClassName('fa-heart');
-                for(x = 0; x < a.length; x++) {
-                    a[x].className = "fa fa-heart-o";
+                i = element.getElementsByClassName('fa');
+                
+                for(x = 0; x < i.length; x++) {
+                    if (typeof alternativeIcon !== "undefined") {
+                        i[x].className = "fa "+alternativeIcon;
+                    }
+                    else {
+                        i[x].className = "fa fa-heart-o";
+                    }
+                }
+                
+                if (typeof activeClass !== "undefined") {
+                    a = element.getElementsByClassName('btn');
+                    for(x = 0; x < a.length; x++) {
+                        a[x].className = a[x].className.replace(activeClass,'').trim();
+                    }
                 }
             }
         });
