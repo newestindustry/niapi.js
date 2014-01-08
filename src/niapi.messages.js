@@ -24,7 +24,7 @@ NI.Messages = {
             }
             
         });
-        setInterval(NI.Messages.GetSidebarCount,15000);
+/*         setInterval(NI.Messages.GetSidebarCount,15000); */
     }
 };
 

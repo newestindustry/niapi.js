@@ -13,7 +13,7 @@ NI.Notifications = {
     },
 
     GetSidebarCount: function() {
-        NI.Api.Get("/notifications/_direction/desc/read/false/_limit/0/type/!global", function(error, data) {
+        NI.Api.Get("/notifications/_direction/desc/read/false/_limit/1/type/!global", function(error, data) {
             if(error) {
                 alert("Er is iets fout gegaan");
             } else {
@@ -39,8 +39,34 @@ NI.Notifications = {
                 }
                 
             }
-            setInterval(NI.Notifications.GetSidebarCount,15000);
         });
+        
+        var elementProfile = document.getElementById('notification_badge_profile');
+        if(elementProfile) {
+            NI.Api.Get("/notifications/_direction/desc/read/false/_limit/1/module/profile/type/!global", function(error, data) {
+                if(data.total === 0) {
+                    elementProfile.style.display = "none";
+                } else {
+                    elementProfile.style.display = "block";
+                    elementProfile.innerHTML = data.total;
+                }
+            });
+        }
+        
+        var elementCollectives = document.getElementById('notification_badge_collective');
+        if(elementCollectives) {
+            NI.Api.Get("/notifications/_direction/desc/read/false/_limit/1/module/collectives/type/!global", function(error, data) {
+                if(data.total === 0) {
+                    elementCollectives.style.display = "none";
+                } else {
+                    elementCollectives.style.display = "block";
+                    elementCollectives.innerHTML = data.total;
+                }
+            });
+        }
+        
+        
+        
     }
 };
 
