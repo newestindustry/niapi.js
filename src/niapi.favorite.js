@@ -74,6 +74,7 @@ NI.Favorite = {
     Click: function(element) {
         var href = element.dataset.href;
         var url, a;
+        var tag = element.dataset.tag;
         var activeClass = element.dataset.styleActive;
         var alternativeIcon = element.dataset.styleIcon;
         var alternativeActiveIcon = element.dataset.styleIconActive;
@@ -83,7 +84,7 @@ NI.Favorite = {
             url = window.location.href;
         }
         
-        NI.Api.Post("/favorites/", "url="+encodeURIComponent(url), function(error, data, x) {
+        NI.Api.Post("/favorites/", "url="+encodeURIComponent(url)+"&tag="+tag, function(error, data, x) {
             if(x.status === 201) { // Created
                 i = element.getElementsByClassName('fa');
                 
