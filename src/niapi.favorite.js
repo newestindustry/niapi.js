@@ -73,11 +73,14 @@ NI.Favorite = {
     
     Click: function(element) {
         var href = element.dataset.href;
-        var url, a;
+        var url, a, func;
         var tag = element.dataset.tag;
         var activeClass = element.dataset.styleActive;
         var alternativeIcon = element.dataset.styleIcon;
         var alternativeActiveIcon = element.dataset.styleIconActive;
+        var postCallbackCreated = element.dataset.postCallbackCreated;
+        var postCallbackRemoved = element.dataset.postCallbackRemoved;
+        
         if(typeof href !== "undefined" && href !== "") {
             url = href;
         } else {
@@ -104,6 +107,13 @@ NI.Favorite = {
                     }
                 }
                 
+                 if (postCallbackCreated) {
+                    if(typeof postCallbackCreated === 'function') {
+                        postCallbackCreated();
+                    } else {
+                        eval(postCallbackCreated);
+                    }
+                }
             } else {
                 // Removed
                 i = element.getElementsByClassName('fa');
@@ -121,6 +131,15 @@ NI.Favorite = {
                     a = element.getElementsByClassName('btn');
                     for(x = 0; x < a.length; x++) {
                         a[x].className = a[x].className.replace(activeClass,'').trim();
+                    }
+                }
+                
+                
+                if (postCallbackRemoved) {
+                    if(typeof postCallbackRemoved === 'function') {
+                        postCallbackRemoved();
+                    } else {
+                        eval(postCallbackRemoved);
                     }
                 }
             }
