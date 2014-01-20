@@ -102,7 +102,7 @@
 					setTimeout( arguments.callee, 0 );
 					return;
 				}
-				if (numStyles === undefined) {
+				if (typeof numStyles === "undefined") {
 	                var links = document.getElementsByTagName("link");
 	                for (var i=0; i < links.length; i++) {
 	                	if(links[i].getAttribute('rel') == 'stylesheet') {
