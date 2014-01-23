@@ -14,6 +14,7 @@ NI.Options = {
     comments_include_hash: true,
     comments_form_position: "bottom",
     comments_reverse: false,
+    comments_css: true,
 
     Set: function(options) {
         var availableOptions = [
@@ -28,7 +29,8 @@ NI.Options = {
             'sidebar_force_margin',
             'comments_include_hash',
             'comments_form_position',
-            'comments_reverse'
+            'comments_reverse',
+            'comments_css'
         ];
     
         if(typeof options === "object") {

@@ -30,7 +30,9 @@ NI.Comments = {
     },
 
     Get: function(id, url) {
-        this.injectCss();
+        if (NI.Options.comments_css === true) {
+            this.injectCss();
+        }
         url = this.setUrl(url);
         
         if(typeof id === "undefined") {
