@@ -14,7 +14,7 @@ NI.Api = {
         this.call({url: uri, data: data, method: "PUT"}, callback);
     },
     
-    Delete: function(uri, data, callback) {
+    Delete: function(uri, callback) {
         this.call({url: uri, method: "DELETE"}, callback);
     },
     
