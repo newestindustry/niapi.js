@@ -3,7 +3,7 @@ NI.Sidebar = {
         var element = document.getElementById('niCssSidebar');
         if(!element) {
             var link = document.createElement("link");
-            link.href = "https://cdn.newestindustry.nl/css/modules/ni-profilebar.css";
+            link.href = "https://cdn.newestindustry.nl/css/modules/ni-profilebar-1.4.css";
             link.type = "text/css";
             link.rel = "stylesheet";
             link.id = "niCssSidebar";

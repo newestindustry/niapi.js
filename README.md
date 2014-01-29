@@ -191,3 +191,44 @@ This will add a favorite button for the webpage http://newestindustry.nl. There 
 	    <td>"active"</td>
 	</tr>
 </table>
+
+## Comment box
+
+You can easily create a comment box on your page by adding the following HTML somewhere in your webpage:
+
+    <div class="ni-comments"></div>
+
+This will create a comment box that uses the current url as its identifier. It is possible to modify the used identifier url (e.g. when you want more comment boxes on one page) by adding a data-href example. See the example below:
+
+    <div class="ni-comments" data-href="http://newestindustry.nl"></div>
+
+
+There are a bunch of other data-attributes available which are listed below.
+
+<table>
+	<tr>
+    	<th>Option</th>
+	    <th>Description</th>
+	    <th>Default value</th>
+		<th>Example value</th>
+    </tr>
+	<tr>
+	    <td>data-href</td>
+	    <td>The identifier url to use with this comment box</td>
+	    <td>The current url</td>
+	    <td>"http://newestindustry.nl"</td>
+	</tr>
+	<tr>
+	    <td>data-form-position</td>
+	    <td>This determines wether the comment form should be placed below (bottom) or above (top) the comments.</td>
+	    <td>"bottom"</td>
+	    <td>"bottom" or "top"</td>
+	</tr>
+	<tr>
+	    <td>data-reverse</td>
+	    <td>This determines wether the comment list order is reversed or not</td>
+	    <td>false (order First to Last)</td>
+	    <td>false or true</td>
+	</tr>
+</table>
+

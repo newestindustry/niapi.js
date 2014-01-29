@@ -31,6 +31,7 @@ NI.injectCss = function() {
 
 DomReady.ready(function() {
     NI.Favorite.Prepare();
+    NI.Comments.Prepare();
 });
 
 NI.injectCss();
