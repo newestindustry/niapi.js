@@ -2,12 +2,12 @@
 
 This is the Newest Industry API Javascript SDK for implementing the oauth2 flows in a js app.
 
-This sdk is also available from our cdn: https://cdn.newestindustry.nl/js/niapi.min.js
+This sdk is also available from our cdn: https://cdn.newestindustry.nl/js/niapi-1.4.min.js
 
 ## Basic implementation
 Basic implementation is pretty simple. All you need is a client_id from us (contact us for getting one) and you can implement our JS Oauth2 Api. Place the js sdk in the header of your document:
 
-	<script src="https://cdn.newestindustry.nl/js/niapi.min.js" type="text/javascript"></script>
+	<script src="https://cdn.newestindustry.nl/js/niapi-1.4.min.js" type="text/javascript"></script>
 	
 And then the following just below:
     
@@ -43,7 +43,7 @@ So here is the full basic implementation in HTML (as an example):
 
     <html>
 	    <head>
-	        <script src="https://cdn.newestindustry.nl/js/niapi.min.js"></script>
+	        <script src="https://cdn.newestindustry.nl/js/niapi-1.4.min.js"></script>
 	        <script>
 	            NI.Options.Set({
 	                client_id: "theclientIDyoureceived",
@@ -85,7 +85,7 @@ You can set multiple options by doing so via the options plugin:
             <td>api_url</td>
             <td>API</td>
             <td>The API endpoint URL</td>
-            <td>"https://api.newestindustry.nl"</td>
+            <td>"https://api.mycollectiv.es"</td>
             <td>A valid url</td>
         </tr>
         <tr>
