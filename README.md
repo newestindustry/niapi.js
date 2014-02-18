@@ -190,6 +190,12 @@ This will add a favorite button for the webpage http://newestindustry.nl. There 
 	    <td>-</td>
 	    <td>"active"</td>
 	</tr>
+	<tr>
+	    <td>data-callback</td>
+	    <td>A callback function to execute after the call is finished. Sends the following params to the callback function: error, data and x.</td>
+	    <td>-</td>
+	    <td>"active"</td>
+	</tr>
 </table>
 
 ## Comment box

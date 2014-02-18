@@ -80,6 +80,7 @@ NI.Favorite = {
         var alternativeActiveIcon = element.dataset.styleIconActive;
         var postCallbackCreated = element.dataset.postCallbackCreated;
         var postCallbackRemoved = element.dataset.postCallbackRemoved;
+        var callbackFunction = element.dataset.callback;
         
         if(typeof href !== "undefined" && href !== "") {
             url = href;
@@ -142,6 +143,10 @@ NI.Favorite = {
                         eval(postCallbackRemoved);
                     }
                 }
+            }
+                
+            if(callbackFunction) {
+                window[callbackFunction](error, data, x);
             }
         });
     }
