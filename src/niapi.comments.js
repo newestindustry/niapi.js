@@ -19,7 +19,7 @@ NI.Comments = {
         var element = document.getElementById('niCssComments');
         if(!element) {
             var link = document.createElement("link");
-            link.href = "https://cdn.newestindustry.nl/css/modules/ni-comments-1.4.css";
+            link.href = "https://cdn.newestindustry.nl/css/modules/ni-comments-1.6.css";
             link.type = "text/css";
             link.rel = "stylesheet";
             link.id = "niCssComments";

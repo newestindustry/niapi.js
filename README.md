@@ -2,7 +2,7 @@
 
 This is the Newest Industry API Javascript SDK for implementing the oauth2 flows in a js app.
 
-This sdk is also available from our cdn: https://cdn.newestindustry.nl/js/niapi-1.4.min.js
+This sdk is also available from our cdn: https://cdn.newestindustry.nl/js/niapi-1.6.min.js
 
 ## Basic implementation
 Basic implementation is pretty simple. All you need is a client_id from us (contact us for getting one) and you can implement our JS Oauth2 Api. Place the js sdk in the header of your document:
