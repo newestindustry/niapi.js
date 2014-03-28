@@ -20,7 +20,7 @@ NI.Api = {
     
     call: function(options, callback) {
         var url, method, data, requestTimeout, x, error;
-        
+
         if(typeof options === "object") {
             url = (typeof options.url !== "undefined") ? NI.Options.api_url+options.url : false;
             method = (typeof options.url !== "undefined") ? options.method.toUpperCase() : "GET";
@@ -82,7 +82,7 @@ NI.Api = {
             x.setRequestHeader("Authorization", "oauth_token "+NI.Options.oauth_token);
         }
     
-        if(!data) {
+        if(!data || data.length === 0 || typeof data.length == "undefined") {
             x.send();
         } else {
             x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
