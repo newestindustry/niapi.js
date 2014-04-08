@@ -1,6 +1,6 @@
 NI.Options = {
     api_url: "https://api.mycollectiv.es",
-    auth_url: "/oauth/auth/",
+    auth_url: "https://auth-a.newestindustry.nl/auth",
     client_id: false,
     redirect_url: false,
     scope: "default",
