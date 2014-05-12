@@ -146,7 +146,7 @@ NI.Favorite = {
             }
                 
             if(callbackFunction) {
-                window[callbackFunction](error, data, x);
+                window[callbackFunction](error, data, x, element);
             }
         });
     }
