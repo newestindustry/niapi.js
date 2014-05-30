@@ -22,12 +22,14 @@ NI.Sidebar = {
                 NI.Messages.GetSidebarCount();
                 NI.Notifications.GetSidebarCount();
                 
-                
                 body.onkeydown = function(e) {
-                    var messagesPreview = document.getElementById('ni-messagesPreview');
                     var keyDown = e.keyCode;
-                    if (messagesPreview.style.display !== "none" && keyDown === 27) {
-                        messagesPreview.style.display = "none";
+                    var messagesPreviewCheck = !!document.getElementById('ni-messagesPreview');
+                    if (messagesPreviewCheck === true && keyDown === 27) {
+                        var messagesPreview = document.getElementById('ni-messagesPreview');
+                        if (typeof messagesPreview != "undefined" && typeof messagesPreview !== null && typeof messagesPreview !== "null" && messagesPreview.style.display !== "none") {
+                            messagesPreview.style.display = "none";
+                        }
                     }
                 };
                 
