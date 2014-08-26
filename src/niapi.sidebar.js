@@ -12,7 +12,7 @@ NI.Sidebar = {
     },
     
     Get: function(callback) {
-        this.injectCss();
+//         this.injectCss();
         var element = document.getElementById("ni-root");
         var body    = document.getElementsByTagName("body")[0];
         
