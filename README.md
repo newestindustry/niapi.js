@@ -85,7 +85,7 @@ You can set multiple options by doing so via the options plugin:
             <td>api_url</td>
             <td>API</td>
             <td>The API endpoint URL</td>
-            <td>"https://api.mycollectiv.es"</td>
+            <td>"https://api.newestindustry.nl"</td>
             <td>A valid url</td>
         </tr>
         <tr>
