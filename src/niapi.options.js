@@ -10,6 +10,8 @@ NI.Options = {
     /* SIDEBAR */
     sidebar_force_margin: true,
     
+    load_css: true,
+    
     /* COMMENTS */
     comments_include_hash: true,
     comments_form_position: "bottom",
@@ -30,7 +32,8 @@ NI.Options = {
             'comments_include_hash',
             'comments_form_position',
             'comments_reverse',
-            'comments_css'
+            'comments_css',
+            'load_css'
         ];
     
         if(typeof options === "object") {

@@ -34,5 +34,8 @@ DomReady.ready(function() {
     NI.Comments.Prepare();
 });
 
-NI.injectCss();
+if(NI.Options.load_css) {
+    NI.injectCss();    
+}
+
 NI.Me = false;
