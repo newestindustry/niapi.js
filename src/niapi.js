@@ -32,10 +32,12 @@ NI.injectCss = function() {
 DomReady.ready(function() {
     NI.Favorite.Prepare();
     NI.Comments.Prepare();
+    
+    if(NI.Options.load_css === true) {
+        NI.injectCss();
+    }
 });
 
-if(NI.Options.load_css) {
-    NI.injectCss();    
-}
+
 
 NI.Me = false;
