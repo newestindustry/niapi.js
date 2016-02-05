@@ -5,19 +5,19 @@ NI.Api = {
     Get: function(uri, callback) {
         this.call({url: uri, method: "GET"}, callback);
     },
-    
+
     Post: function(uri, data, callback) {
         this.call({url: uri, data: data, method: "POST"}, callback);
     },
-    
+
     Put: function(uri, data, callback) {
         this.call({url: uri, data: data, method: "PUT"}, callback);
     },
-    
+
     Delete: function(uri, callback) {
         this.call({url: uri, method: "DELETE"}, callback);
     },
-    
+
     call: function(options, callback) {
         var url, method, data, requestTimeout, x, error;
 
@@ -26,7 +26,7 @@ NI.Api = {
             method = (typeof options.url !== "undefined") ? options.method.toUpperCase() : "GET";
             data = (typeof options.url !== "undefined") ? options.data : false;
         }
-        
+
         if(typeof callback === "undefined") {
             callback = NI.Api.emptyCallback;
         }
@@ -43,18 +43,18 @@ NI.Api = {
                 return null;
             }
         }
-    
+
         requestTimeout = setTimeout(function() {
             x.abort();
             callback(new Error("NIApi: Timeout Reached"), "",x);
         }, 10000);
-    
+
         x.onreadystatechange = function() {
             if (x.readyState !== 4) {
                 return;
             } else {
                 clearTimeout(requestTimeout);
-                
+
                 if(x.status === 200 || x.status === 201 || x.status === 204) {
                     error = false;
                 } else if(x.status === 401) {
@@ -65,23 +65,22 @@ NI.Api = {
                 }
 
                 var data;
-                
-                if(x.getResponseHeader('content-type').indexOf("application/json") !== -1 && x.status !== 204) {
+                if(typeof x.getResponseHeader('content-type') !== "undefined" && x.getResponseHeader('content-type') !== null && x.getResponseHeader('content-type').indexOf("application/json") !== -1 && x.status !== 204) {
                     data = JSON.parse(x.responseText);
                 } else {
                     data = x.responseText;
                 }
-                
+
                 callback(error, data, x);
             }
         };
-    
+
         x.open(method, url, true);
-    
+
         if(NI.Options.oauth_token) {
             x.setRequestHeader("Authorization", "oauth_token "+NI.Options.oauth_token);
         }
-    
+
         if(!data || data.length === 0 || typeof data.length == "undefined") {
             x.send();
         } else {
@@ -91,7 +90,7 @@ NI.Api = {
         return false;
     },
 
-    
+
     toQueryString: function(obj) {
         var str = "";
         var seperator = "";
@@ -102,7 +101,7 @@ NI.Api = {
         }
         return str;
     },
-    
+
     parseToken: function() {
         var params = {}, queryString = location.hash.substring(1), regex = /([^&=]+)=([^&]*)/g;
         var queryStringParts = regex.exec(queryString);
@@ -116,14 +115,14 @@ NI.Api = {
         } else if(localStorage.oauth_token) {
             NI.Options.setToken(localStorage.oauth_token);
         }
-        
+
         if(params.error) {
             NI.Api.error = params.error;
         }
     },
 
-    
+
     emptyCallback: function() {
-        
+
     }
 };
